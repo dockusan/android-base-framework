@@ -19,6 +19,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
  * SQLite database implementation. Note that this class
  * only contains methods that access Jams' private
@@ -34,7 +40,9 @@ public class DBAccessHelper extends SQLiteOpenHelper {
 
     //Writable database instance.
     private SQLiteDatabase mDatabase;
-
+    //Databse path url
+    public static String DB_PATH = "";
+    private static final String DB_NAME = "AndroidBaseFramework.sqlite";
     //Database Version.
     private static final int DATABASE_VERSION = 1;
 
@@ -48,10 +56,13 @@ public class DBAccessHelper extends SQLiteOpenHelper {
     public static final String MUSIC_FOLDERS_TABLE = "MusicFoldersTable";
     public static final String FOLDER_PATH = "folder_path";
     public static final String INCLUDE = "include";
+    private final Context mContext;
 
 
     public DBAccessHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.mContext = context;
+        DB_PATH = "/data/data/" + mContext.getPackageName() + "/databases/" + DB_NAME;
     }
 
     /**
@@ -65,6 +76,68 @@ public class DBAccessHelper extends SQLiteOpenHelper {
             sInstance = new DBAccessHelper(context.getApplicationContext());
 
         return sInstance;
+    }
+
+    /**
+     * copy database from assets to the device if not existed
+     *
+     * @return true if not exist and create database success
+     * @throws IOException
+     */
+    public boolean isCreatedDatabase() throws IOException {
+        // Default lÃ  Ä‘Ã£ cÃ³ DB
+        boolean result = true;
+        // Náº¿u chÆ°a tá»“n táº¡i DB thÃ¬ copy tá»« Asses vÃ o Data
+        if (!checkExistDataBase()) {
+            this.getReadableDatabase();
+            try {
+                copyDataBase();
+                result = false;
+            } catch (Exception e) {
+                throw new Error("Error copying database");
+            }
+        }
+        return result;
+    }
+
+    /**
+     * check whether database exist on the device?
+     *
+     * @return true if existed
+     */
+
+    private boolean checkExistDataBase() {
+
+        try {
+            String myPath = DB_PATH;
+            File fileDB = new File(myPath);
+
+            if (fileDB.exists()) {
+                return true;
+            } else
+                return false;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * copy database from assets folder to the device
+     *
+     * @throws IOException
+     */
+    private void copyDataBase() throws IOException {
+        InputStream myInput = mContext.getAssets().open(DB_NAME);
+        OutputStream myOutput = new FileOutputStream(DB_PATH);
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = myInput.read(buffer)) > 0) {
+            myOutput.write(buffer, 0, length);
+        }
+
+        myOutput.flush();
+        myOutput.close();
+        myInput.close();
     }
 
     /**
