@@ -26,12 +26,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /**
- * SQLite database implementation. Note that this class
- * only contains methods that access Jams' private
- * database. For methods that access Android's
- * MediaStore database, see MediaStoreAccessHelper.
- *
- * @author Saravan Pantham
+ * SQLite database implementation.
  */
 public class DBAccessHelper extends SQLiteOpenHelper {
 
