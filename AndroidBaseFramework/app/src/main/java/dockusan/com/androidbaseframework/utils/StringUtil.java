@@ -4,6 +4,7 @@ package dockusan.com.androidbaseframework.utils;
  * Created by SF on 05/05/2016.
  */
 public class StringUtil {
+
     public static boolean checkStringNull(String data) {
         if (data != null) {
             return true;
