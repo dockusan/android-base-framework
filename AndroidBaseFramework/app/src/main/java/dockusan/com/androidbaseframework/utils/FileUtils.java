@@ -14,7 +14,8 @@ import android.webkit.MimeTypeMap;
 
 import java.io.File;
 
-import dockusan.com.androidbaseframework.application.BaseApplication;
+import dockusan.com.androidbaseframework.BaseApplication;
+
 
 /**
  * Created by HUNGCV on 7/2/2015.

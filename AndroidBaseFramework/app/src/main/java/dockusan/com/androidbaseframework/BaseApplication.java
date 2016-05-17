@@ -1,14 +1,15 @@
-package dockusan.com.androidbaseframework.application;
+package dockusan.com.androidbaseframework;
 
 import android.app.Application;
+
 
 import dockusan.com.androidbaseframework.callbacks.ActivityLifecycleCallback;
 import dockusan.com.androidbaseframework.utils.SharedPrefUtils;
 
 /**
- * Created by SF on 05/05/2016.
+ * Created by SF on 11/05/2016.
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends Application{
     private static BaseApplication instance;
     private static SharedPrefUtils sharedPreferences;
     private static boolean mIsAppRunning;
@@ -20,6 +21,7 @@ public class BaseApplication extends Application {
     public static BaseApplication getInstance() {
         return instance;
     }
+
     @Override
     public void onCreate() {
         super.onCreate();

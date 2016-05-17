@@ -5,7 +5,7 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
-import dockusan.com.androidbaseframework.application.BaseApplication;
+import dockusan.com.androidbaseframework.BaseApplication;
 
 
 public class ScreenHelper {

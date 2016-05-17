@@ -3,12 +3,12 @@ package dockusan.com.androidbaseframework.utils;
 
 import android.content.Context;
 
-import dockusan.com.androidbaseframework.application.BaseApplication;
+import dockusan.com.androidbaseframework.BaseApplication;
 
 
 public class SharedPrefUtils {
 
-    public static final String SHAREPREF_NAME = "YOUR_APP";
+    public static final String SHAREPREF_NAME = "VW";
 
     // // internal handle
 
@@ -20,7 +20,6 @@ public class SharedPrefUtils {
     public SharedPrefUtils(Context context) {
         this.preferences = new SecurePreferences(context);
     }
-
 
     private void putStringOrReplace(String key, String value) {
         if (value == null) {
